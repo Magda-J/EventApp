@@ -31,19 +31,19 @@ export class ApiClient {
     });
   }
 
-  getAds() {
+  getEvents() {
     return this.authenticatedCall("get", url);
   }
 
-  addAd(name, price) {
+  addEvent(name, price) {
     return this.authenticatedCall("post", url, { name, price });
   }
 
-  removeAd(id) {
+  removeEvent(id) {
     return this.authenticatedCall("delete", `${url}${id}`);
   }
 
-  updateAd(id, name, price) {
+  updateEvent(id, name, price) {
     return this.authenticatedCall("put", `${url}${id}`, { name, price });
   }
 

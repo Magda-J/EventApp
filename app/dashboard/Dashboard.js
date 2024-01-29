@@ -1,24 +1,24 @@
 "use client";
 import { useEffect, useState } from "react";
-import Add from "./Add";
+import Add from "../components/Add";
 
 const Dashboard = (props) => {
-  const [ads, setAds] = useState([]);
+  const [events, setEvents] = useState([]);
   const [current, setCurrent] = useState(undefined);
 
-  // gets the ads from the backend and updates the state in this file
+  // gets the events from the backend and updates the state in this file
 
   const refreshList = () => {
-    props.client.getAds().then((response) => {
-      setAds(response.data);
+    props.client.getEvents().then((response) => {
+      setEvents(response.data);
     });
   };
 
   // removes the advert and then calls refresh list so that the list of ads
   //  is updated and doesnt include the ad that the user just deleted.
 
-  const removeAdvert = (id) => {
-    props.client.removeAd(id).then(() => {
+  const removeEvents = (id) => {
+    props.client.removeEvent(id).then(() => {
       refreshList();
     });
   };
@@ -26,8 +26,8 @@ const Dashboard = (props) => {
   // take an ad from a child component and then we will set the current state to that at
   // so that we can edit it later on
 
-  const updateAdvert = (ad) => {
-    setCurrent(ad);
+  const updateEvents = (event) => {
+    setCurrent(event);
   };
 
   // this function is called when the component renders and it calls the refresh list function
@@ -38,14 +38,14 @@ const Dashboard = (props) => {
   }, []);
 
   const buildrows = () => {
-    return ads.map((current) => {
+    return events.map((current) => {
       return (
         <tr key={current._id}>
           <td>{current.name}</td>
           <td>${current.price}</td>
           <td>
-            <button onClick={() => removeAdvert(current._id)}>Delete Ad</button>
-            <button onClick={() => updateAdvert(current)}>update</button>
+            <button onClick={() => removeEvent(current._id)}>Delete Ad</button>
+            <button onClick={() => updateEvent(current)}>update</button>
           </td>
         </tr>
       );
@@ -57,7 +57,7 @@ const Dashboard = (props) => {
       Dashboard
       <table>
         <thead>
-          <th>Advert name</th>
+          <th>Event name</th>
           <th>Price</th>
         </thead>
         <tbody>{buildrows()}</tbody>
@@ -68,7 +68,7 @@ const Dashboard = (props) => {
           refreshList();
           setCurrent(undefined);
         }}
-        currentAd={current}
+        currentEvent={current}
       />
     </div>
   );

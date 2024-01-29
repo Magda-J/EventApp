@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { ApiClient } from "@/apiClient";
-import Dashboard from "@/Dashboard";
-import Login from "@/Login";
+import Dashboard from "@/app/dashboard/Dashboard";
+import Login from "@/app/components/Login";
 
 export default function Home() {
   const [token, setToken] = useState(null);
