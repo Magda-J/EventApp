@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <>
       {token ? (
-        <Dashboard client={client} />
+        <Dashboard client={client}/>
       ) : (
         <Login loggedIn={(token) => login(token)} client={client} />
       )}
