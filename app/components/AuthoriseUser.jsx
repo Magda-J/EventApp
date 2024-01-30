@@ -26,7 +26,7 @@ const AuthoriseUser = (props) => {
   // }
 
   return (
-    <div className="h-screen w-screen flex flex-1 justify-center items-center ">
+    <div id="authorisation" className="h-screen w-screen flex flex-1 justify-center items-center ">
       {!authProcess ? (
         <SignIn setAuthProcess={setAuthProcess} />
       ) : (
