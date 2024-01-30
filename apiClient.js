@@ -9,8 +9,8 @@ export class ApiClient {
     this.logoutHandler = logoutHandler;
   }
 
-  authenticatedCall(method, url, data) {
-    return axios({
+  async authenticatedCall(method, url, data) {
+    return await axios({
       method,
       url,
       headers: {
@@ -31,8 +31,9 @@ export class ApiClient {
     });
   }
 
-  getEvents() {
-    return this.authenticatedCall("get", url);
+  async getEvents() {
+    console.log("Get events - call api")
+    return await this.authenticatedCall("get", url);
   }
 
   addEvent(name, city, date, price, description) {
@@ -41,7 +42,7 @@ export class ApiClient {
   }
 
   addAd(name, price) {
-    console.log("addAdd Api Client called")
+    console.log("addAd Api Client called")
     return this.authenticatedCall("post", url, { name, price });
   }
 
@@ -50,6 +51,7 @@ export class ApiClient {
   }
 
   updateEvent(id, name, city, date, price, description) {
+    console.log(`Calling Update: ${id}`)
     return this.authenticatedCall("put", `${url}${id}`, { name, city, date, price, description });
   }
 

@@ -12,48 +12,51 @@ const EventForm = (props) => {
      
           // form validation to make sure we send the correct data and types to the backend
           
-          if(e.target.eventPrice !== "")
+          if(e.target.EventPrice !== "")
           {
-               e.target.eventPrice.value = Number(e.target.eventPrice.value)
+               console.log(e.target.EventPrice)
+          
+               e.target.EventPrice.value = Number(e.target.EventPrice.value)
           }
-          console.log(e.target.eventPrice.value)
+          console.log(e.target.EventDate.value)
          
-          if (!e.target.eventName.value || !e.target.eventDate.value || !e.target.eventDescription.value || !e.target.eventCity.value || typeof e.target.eventPrice.value !== "number") {
-               if(!e.target.eventName.value)
+          if (!e.target.EventName.value || !e.target.EventDate.value || !e.target.EventDescription.value || !e.target.EventCity.value || typeof e.target.EventPrice.value !== "number") {
+               if(!e.target.EventName.value)
                {
                     alert("Please enter Event Name")
                     setDisabled(false);
                }
-               else if(!e.target.eventDate.value)
+               else if(!e.target.EventDate.value)
                {
                     alert("Please enter Event Date")
                     setDisabled(false);
                }
-               else if(!e.target.eventDescription.value)
+               else if(!e.target.EventDescription.value)
                {
                     alert("Please enter Event Description")
                     setDisabled(false);
                }
-               else if(!e.target.eventCity.value)
+               else if(!e.target.EventCity.value)
                {
                     alert("Please enter Event City")
                     setDisabled(false)
                }
-               else if(typeof e.target.eventPrice.value === "number")
+               else if(typeof e.target.EventPrice.value === "number")
                {
                     alert("Please enter Valid price")
                     setDisabled(false)
                }
-               return;
           }
      
-          // if there is a current event, we know that the user is updating an event because in order to have 
+          // if there is a current Event, we know that the user is updating an event because in order to have 
           // a current event, the user has to have clicked on the update button for that event
-
+        
           if (props.currentEvent) {
-               result = props.client.updateEvent(props.currentEvent._id, e.target.eventName.value, e.target.eventCity.value, e.target.eventDate.value, e.target.eventPrice.value, e.target.eventDescription.value );
+               console.log("Submit Event to UpdateEvent");
+               result = props.client.updateEvent(props.currentEvent.keyA, e.target.EventName.value, e.target.EventCity.value, e.target.EventDate.value, e.target.EventPrice.value, e.target.EventDescription.value );
           } else {
-               result = props.client.addEvent(e.target.eventName.value, e.target.eventCity.value, e.target.eventDate.value, e.target.eventPrice.value, e.target.eventDescription.value );
+               console.log("Submit Event to addEvent")
+               result = props.client.addEvent(e.target.EventName.value, e.target.EventCity.value, e.target.EventDate.value, e.target.EventPrice.value, e.target.EventDescription.value );
           }
         
 
@@ -61,34 +64,35 @@ const EventForm = (props) => {
                setDisabled(false);
                document.getElementById("addForm").reset();
                props.refreshList()
-          }).catch(() => {
-               alert("there was an error")
+               props.setCurrent(undefined)
+          }).catch((error) => {
+               alert(error)
                setDisabled(false);
           })
      }
   return (
      <form className='flex flex-col w-full h-full bg-[#EFEBCE] rounded-lg gap-4 shadow-lg shadow-black p-[5%]'
      onSubmit={submitHandler} id='addForm'>
-          <button type="submit" className='rounded-lg bg-[#D6CE93] mx-[5%] h-[20%]' disabled={disabled} >Create Event</button>
+          <button type="submit" className='rounded-lg bg-[#D6CE93] mx-[5%] h-[20%]' disabled={disabled} >{props.currentEvent? "Update Event" : "Create Event"}</button>
           
           <div className='mx-[10%] flex gap-4 h-[10%]'>
                <input type="text" className='rounded-lg w-[50%] p-1' placeholder='Event Name:'
-               defaultValue={props.currentEvent?.eventName} disabled={disabled} id='eventName'/>
+               defaultValue={props.currentEvent?.EventName} disabled={disabled} name='EventName'/>
 
                <input type="date" className='rounded-lg w-[50%] p-1' 
-               defaultValue={props.currentEvent?.eventDate} disabled={disabled} id='eventDate'/>
+               defaultValue={props.currentEvent?.EventDate} disabled={disabled} name='EventDate'/>
           </div>
 
           <div className='mx-[10%] flex gap-4 h-[10%]'>
                <input type="text" className='rounded-lg w-[50%] p-1' placeholder='City'
-               defaultValue={props.currentEvent?.eventCity} disabled={disabled} id='eventCity'/>
+               defaultValue={props.currentEvent?.EventCity} disabled={disabled} name='EventCity'/>
 
                <input type="text" className='rounded-lg w-[50%] p-1' 
-               defaultValue={props.currentEvent?.eventPrice} disabled={disabled} id='eventPrice' placeholder='Price'/>
+               defaultValue={props.currentEvent?.EventPrice} disabled={disabled} name='EventPrice' placeholder='Price'/>
           </div>
 
-          <textarea className='rounded-lg mx-[10%] max-h-full min-h-[50%] p-1' id='eventDescription' 
-          defaultValue={props.currentEvent?.eventDescription} disabled={disabled}  placeholder='Description'/>
+          <textarea className='rounded-lg mx-[10%] max-h-full min-h-[50%] p-1' name='EventDescription' 
+          defaultValue={props.currentEvent?.EventDescription} disabled={disabled}  placeholder='Description'/>
      </form>
   )
 }

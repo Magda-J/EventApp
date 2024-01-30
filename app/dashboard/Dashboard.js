@@ -14,6 +14,8 @@ const Dashboard = (props) => {
   const refreshList = () => {
     props.client.getEvents().then((response) => {
       setEvents(response.data);
+    }).catch((err) => {
+      console.log("failed to get API request (GET)")
     });
   };
 
@@ -33,31 +35,17 @@ const Dashboard = (props) => {
     setCurrent(event);
   };
 
+  useEffect(() => {
+    console.log("Update current")
+  }, [current])
+
   // this function is called when the component renders and it calls the refresh list function
   // that allows us to see the ads from the db (useeffect)
 
   useEffect(() => {
     refreshList();
+    console.log(events);
   }, []);
-
-  const buildrows = () => {
-    return events.map((current) => {
-      return (
-        <div>
-
-
-          <EventCard 
-          key={current._id}
-          EventName={current.name} 
-          EventCity={current.city}
-          EventDate={current.date}
-          EventPrice={current.price}
-          EventDescription={current.description}
-          />
-      </div>
-      );
-    });
-  };
 
   return (
     <div>
@@ -69,22 +57,32 @@ const Dashboard = (props) => {
           client={props.client}
           refreshList={() => {
             refreshList();
-            setCurrent(undefined);
           }}
-          currentAd={current}
+          setCurrent={() => {
+            setCurrent()
+          }}
+          currentEvent={current}
         />
       </div>
       <div className="md:w-[50%] h-full pr-[5%] sm:pl-[5%] md:fixed right-0 sm:w-[100vw] md:overflow-y-scroll">
-        <Add
-          client={props.client}
-          refreshList={() => {
-            refreshList();
-            setCurrent(undefined);
-          }}
-          currentAd={current}
-        />
-          
-        {buildrows}
+        {/* {buildrows} */}
+        {events.map((current) => (
+          <div>
+            {/* {console.log(current._id)} */}
+            <EventCard 
+              removeEvents={(id) =>
+                removeEvents(id)
+              }
+              keyA={current._id}
+              EventName={current.name} 
+              EventCity={current.city}
+              EventDate={current.date}
+              EventPrice={current.price}
+              EventDescription={current.description}
+              updateEvents={updateEvents}
+            />
+          </div>
+          ))}
       </div>
 
 

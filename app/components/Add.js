@@ -13,7 +13,7 @@ const Add = (props) => {
 
         // form validation to make sure we send the correct data and types to the backend
         e.target.price.value = Number(e.target.price.value)
-        if (!e.target.adName.value || !e.target.price.value || !typeof e.target.price.value === "number" ) {
+        if (!e.target.adName.value || !e.target.price.value || typeof e.target.price.value !== "number" ) {
             alert("Please enter a valid name and price")
             setDisabled(false);
             return;
@@ -27,6 +27,7 @@ const Add = (props) => {
         } else {
             result = props.client.addAd(e.target.adName.value, e.target.price.value);
         }
+
 
         result.then(() => {
             setDisabled(false);
