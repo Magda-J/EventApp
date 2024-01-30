@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import Add from "../components/Add";
+import EventCard from "../components/EventCard"
+
 
 const Dashboard = (props) => {
   const [events, setEvents] = useState([]);
@@ -53,7 +55,7 @@ const Dashboard = (props) => {
   };
 
   return (
-    <div>
+    <div className="bg-[#D6CE93]">
       Dashboard
       <table>
         <thead>
@@ -70,6 +72,7 @@ const Dashboard = (props) => {
         }}
         currentEvent={current}
       />
+      <EventCard />
     </div>
   );
 };
