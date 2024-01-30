@@ -35,6 +35,6 @@ export default function Home() {
       ) : (
         <Login loggedIn={(token) => login(token)} client={client} />
       )}
-    </>
+    </>  
   );
 }

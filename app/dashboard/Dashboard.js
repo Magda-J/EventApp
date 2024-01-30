@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Add from "../components/Add";
+import EventForm from "../components/EventForm";
 
 const Dashboard = (props) => {
   const [events, setEvents] = useState([]);
@@ -54,6 +55,11 @@ const Dashboard = (props) => {
 
   return (
     <div>
+      
+      <div className=" md:fixed md:w-[50%] max-sm:w-screen max-sm:h-[50%] md:h-[50vw] pr-[10%] pl-[5%] pt-[5%] pb-[10%]">
+        <EventForm />
+      </div>
+    
       Dashboard
       <table>
         <thead>
@@ -70,6 +76,7 @@ const Dashboard = (props) => {
         }}
         currentEvent={current}
       />
+      <div className="h-[200vh]"></div>
     </div>
   );
 };
