@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Add from "../components/Add";
 import EventForm from "../components/EventForm";
+import EventCard from "../components/EventCard"
 
 const Dashboard = (props) => {
   const [events, setEvents] = useState([]);
@@ -38,45 +39,32 @@ const Dashboard = (props) => {
     refreshList();
   }, []);
 
-  const buildrows = () => {
-    return events.map((current) => {
-      return (
-        <tr key={current._id}>
-          <td>{current.name}</td>
-          <td>${current.price}</td>
-          <td>
-            <button onClick={() => removeEvent(current._id)}>Delete Ad</button>
-            <button onClick={() => updateEvent(current)}>update</button>
-          </td>
-        </tr>
-      );
-    });
-  };
+  // const buildrows = () => {
+  //   return events.map((current) => {
+  //     return (
+  //       <tr key={current._id}>
+  //         <td>{current.name}</td>
+  //         <td>${current.price}</td>
+  //         <td>
+  //           <button onClick={() => removeEvent(current._id)}>Delete Ad</button>
+  //           <button onClick={() => updateEvent(current)}>update</button>
+  //         </td>
+  //       </tr>
+  //     );
+  //   });
+  // };
 
   return (
     <div>
-      
-      <div className=" md:fixed md:w-[50%] max-sm:w-screen max-sm:h-[50%] md:h-[50vw] pr-[10%] pl-[5%] pt-[5%] pb-[10%]">
+      <div className=" md:fixed md:w-[50%] max-sm:w-screen max-sm:h-[50%] md:h-[50vw] pr-[5%] pl-[5%] pt-[5%] pb-[10%]">
         <EventForm />
       </div>
+      <div className="md:w-[50%] h-full pr-[5%] sm:pl-[5%] md:fixed right-0 sm:w-[100vw] md:overflow-y-scroll">
+        <EventCard />
+        <EventCard />
+      </div>
     
-      Dashboard
-      <table>
-        <thead>
-          <th>Event name</th>
-          <th>Price</th>
-        </thead>
-        <tbody>{buildrows()}</tbody>
-      </table>
-      <Add
-        client={props.client}
-        refreshList={() => {
-          refreshList();
-          setCurrent(undefined);
-        }}
-        currentEvent={current}
-      />
-      <div className="h-[200vh]"></div>
+      
     </div>
   );
 };
