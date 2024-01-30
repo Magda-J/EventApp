@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Add from "../components/Add";
 import EventForm from "../components/EventForm";
 import EventCard from "../components/EventCard"
+import LogoutButton from "../components/logoutButton";
 
 const Dashboard = (props) => {
   const [events, setEvents] = useState([]);
@@ -39,32 +40,54 @@ const Dashboard = (props) => {
     refreshList();
   }, []);
 
-  // const buildrows = () => {
-  //   return events.map((current) => {
-  //     return (
-  //       <tr key={current._id}>
-  //         <td>{current.name}</td>
-  //         <td>${current.price}</td>
-  //         <td>
-  //           <button onClick={() => removeEvent(current._id)}>Delete Ad</button>
-  //           <button onClick={() => updateEvent(current)}>update</button>
-  //         </td>
-  //       </tr>
-  //     );
-  //   });
-  // };
+  const buildrows = () => {
+    return events.map((current) => {
+      return (
+        <div>
+
+
+          <EventCard 
+          key={current._id}
+          EventName={current.name} 
+          EventCity={current.city}
+          EventDate={current.date}
+          EventPrice={current.price}
+          EventDescription={current.description}
+          />
+      </div>
+      );
+    });
+  };
 
   return (
     <div>
+      <div className="fixed z-[1] right-4 top-4">
+        <LogoutButton />
+      </div>
       <div className=" md:fixed md:w-[50%] max-sm:w-screen max-sm:h-[50%] md:h-[50vw] pr-[5%] pl-[5%] pt-[5%] pb-[10%]">
-        <EventForm />
+        <EventForm 
+          client={props.client}
+          refreshList={() => {
+            refreshList();
+            setCurrent(undefined);
+          }}
+          currentAd={current}
+        />
       </div>
       <div className="md:w-[50%] h-full pr-[5%] sm:pl-[5%] md:fixed right-0 sm:w-[100vw] md:overflow-y-scroll">
-        <EventCard />
-        <EventCard />
+        <Add
+          client={props.client}
+          refreshList={() => {
+            refreshList();
+            setCurrent(undefined);
+          }}
+          currentAd={current}
+        />
+          
+        {buildrows}
       </div>
-    
-      
+
+
     </div>
   );
 };

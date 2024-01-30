@@ -35,7 +35,13 @@ export class ApiClient {
     return this.authenticatedCall("get", url);
   }
 
-  addEvent(name, price) {
+  addEvent(name, city, date, price, description) {
+    console.log("addEvent Api Client called")
+    return this.authenticatedCall("post", url, { name, city, date, price, description });
+  }
+
+  addAd(name, price) {
+    console.log("addAdd Api Client called")
     return this.authenticatedCall("post", url, { name, price });
   }
 
@@ -43,8 +49,8 @@ export class ApiClient {
     return this.authenticatedCall("delete", `${url}${id}`);
   }
 
-  updateEvent(id, name, price) {
-    return this.authenticatedCall("put", `${url}${id}`, { name, price });
+  updateEvent(id, name, city, date, price, description) {
+    return this.authenticatedCall("put", `${url}${id}`, { name, city, date, price, description });
   }
 
   async login(username, password) {
@@ -55,3 +61,9 @@ export class ApiClient {
     });
   }
 }
+
+// name: String,
+// city: String,
+// date: Number,
+// price: Number,
+// description: String

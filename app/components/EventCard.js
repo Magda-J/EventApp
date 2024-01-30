@@ -1,10 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const EventCard = (props) => {
+const EventCard = (
+  {
+    key, 
+    EventName, 
+    EventCity,
+    EventDate,
+    EventPrice,
+    EventDescription
+  }
+) => {
   const [events, setEvents] = useState([]);
   const [current, setCurrent] = useState(undefined);
-
+  const keyID = key
   return (
     <div className="w-full flex flex-col">
       
@@ -12,7 +21,7 @@ const EventCard = (props) => {
         <div className="card w-full bg-gradient-to-b from-[#F5F1DF] to-[#E2E2C7] shadow-lg shadow-black border rounded-xl">
           <div className="card-body flex flex-col items-center justify-center">
             <h2 className="card-title hover:text-[#087CA7] text-2xl text-[#221D23] font-bold md:text-4xl text-center p-4">
-              Event Name
+              {EventName}
             </h2>
 
             <div className="flex items-center justify-center mb-5"></div>
@@ -23,7 +32,7 @@ const EventCard = (props) => {
                     Location
                   </p>
                   <p className="whitespace-normal text-[#221D23] text-center md:text-2xl ">
-                    London
+                    {EventCity}
                   </p>
                 </div>
                 <div>
@@ -31,20 +40,20 @@ const EventCard = (props) => {
                     Date
                   </p>
                   <p className="whitespace-normal text-[#221D23] text-center md:text-2xl ">
-                    20-04-2024
+                    {EventDate}
                   </p>
                 </div>
                 <div className="col-span-2 h-64 rounded-2xl border-[#087CA7] border-2 bg-white">
                   <p className="whitespace-normal hover:text-[#087CA7] text-[#221D23] text-center mt-2 font-bold text-sm md:text-base ">
-                    Event Description
+                    Description
                   </p>
                   <p className="whitespace-normal text-[#221D23] text-center md:text-2xl">
-                    Text
+                    {EventDescription}
                   </p>
                 </div>
                 <div className="col-span-3 sm:col-span-2 flex justify-center">
                   <p className="whitespace-normal mr-2 font-bold hover:text-[#087CA7] text-[#221D23] text-sm md:text-base">
-                    Price:
+                    Ticket Price: {EventPrice}
                   </p>
                   <p className="text-sm text-[#221D23] md:text-base">Price</p>
                 </div>
