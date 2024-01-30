@@ -66,7 +66,7 @@ const EventCard = (props) => {
         <tbody>{buildrows()}</tbody>
       </table> */}
       <div className="flex item-center sm:justify-end p-4">
-        <div className="card w-full md:w-1/2 bg-gradient-to-b from-[#F5F1DF] to-[#E2E2C7] shadow-xl border rounded-xl border-[#087CA7] border-2">
+        <div className="card w-full md:w-1/2 bg-gradient-to-b from-[#F5F1DF] to-[#E2E2C7] shadow-lg shadow-black border rounded-xl">
           <div className="card-body flex flex-col items-center justify-center">
             <h2 className="card-title hover:text-[#087CA7] text-2xl text-[#221D23] font-bold md:text-4xl text-center p-4">
               Event Name
