@@ -71,9 +71,9 @@ const EventForm = (props) => {
           })
      }
   return (
-     <form className='flex flex-col w-full h-full bg-[#EFEBCE] rounded-lg gap-4 shadow-lg shadow-black p-[5%]'
+     <form className='flex flex-col w-full h-full bg-slate-200 rounded-lg gap-4 shadow-lg shadow-black p-[5%]'
      onSubmit={submitHandler} id='addForm'>
-          <button type="submit" className='rounded-lg bg-[#D6CE93] mx-[5%] h-[20%]' disabled={disabled} >{props.currentEvent? "Update Event" : "Create Event"}</button>
+          <button type="submit" className='rounded-lg bg-[#087CA7] mx-[5%] h-[20%] sm:mx-auto w-full flex justify-center items-center text-white p-4 font-bold rounded-lg bg-[#087CA7] hover:text-[#087CA7] hover:bg-[#DFC2F2] focus:ring-1 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 transition-all duration-300 ease-in-out' disabled={disabled} >{props.currentEvent? "Update Event" : "Create Event"}</button>
           
           <div className='mx-[10%] flex gap-4 h-[10%]'>
                <input type="text" className='rounded-lg w-[50%] p-1' placeholder='Event Name:'
