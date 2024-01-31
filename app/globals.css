@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+#authorisation {
+    background-color: #EFEBCE;
+}
+
+#signIn {
+    color: #221D23;
+    background-color: #D6CE93;
+    border-color: #DFC2F2;
+}
+
+#signUp {
+    color: #221D23;
+    background-color: #D6CE93;
+    border-color: #DFC2F2;
+}
+
+.user-border {
+    border-color: #DFC2F2;
+}
 
 /* width */
 ::-webkit-scrollbar {
