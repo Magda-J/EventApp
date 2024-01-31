@@ -5,7 +5,7 @@ const EventCard = (
 ) => {
   const keyID = props.keyA
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col p-1">
       
       <div className="flex item-center w-full sm:justify-end sm:pb-8 md:pb-4 md:pt-8">
         <div className="card w-full bg-gradient-to-b from-[#F5F1DF] to-[#E2E2C7] shadow-lg shadow-black border rounded-xl">
@@ -33,7 +33,7 @@ const EventCard = (
                     {props.EventDate}
                   </p>
                 </div>
-                <div className="col-span-2 h-64 rounded-2xl border-[#087CA7] border-2 bg-white">
+                <div className="col-span-2 h-64 rounded-2xl border-[#087CA7] border-2 p-2 bg-white">
                   <p className="whitespace-normal hover:text-[#087CA7] text-[#221D23] text-center mt-2 font-bold text-sm md:text-base ">
                     Description
                   </p>

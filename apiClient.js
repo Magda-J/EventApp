@@ -43,7 +43,7 @@ export class ApiClient {
 
   addAd(name, price) {
     console.log("addAd Api Client called")
-    return this.authenticatedCall("post", url, { name, price });
+    return this.authenticatedCall("post", url, { name, price }); // "http://localhost:3001/"
   }
 
   removeEvent(id) {
@@ -56,11 +56,15 @@ export class ApiClient {
   }
 
   async login(username, password) {
-    return await axios({
-      method: "post",
-      url: `${url}auth`,
-      data: { username, password },
-    });
+    console.log("SIGNED UP USER NOW TRIYNG TO LOG IN")
+
+    return this.authenticatedCall("post", `${url}auth`, {username, password});
+  }
+
+  async signUp(username, password) {
+    console.log('CALLED SIGN UP CALL')
+
+    return this.authenticatedCall("post", `${url}signup`, {username, password});
   }
 }
 

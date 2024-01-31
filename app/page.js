@@ -12,6 +12,10 @@ export default function Home() {
   );
 
   useEffect(() => {
+    console.log("Page Log out")
+  }, [token]);
+
+  useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       setToken(token);
@@ -31,7 +35,7 @@ export default function Home() {
   return (
     <>
       {token ? (
-        <Dashboard client={client}/>
+        <Dashboard setToken={setToken} client={client}/>
       ) : (
         <AuthoriseUser loggedIn={(token) => login(token)} client={client} />
       )}

@@ -13,24 +13,34 @@ const AuthoriseUser = (props) => {
   }, [authProcess])
 
   // - - Alfie Code - -
-  // const submitHandler = (e) => {
-  //     e.preventDefault();
-  //     setDisabled(true);
-  //     props.client.login(e.target.username.value, e.target.password.value).then((response) => {
-  //         setDisabled(false);
-  //         props.loggedIn(response.data.token)
-  //     }).catch(() => {
-  //         alert("an error occured.")
-  //         setDisabled(false);
-  //     })
-  // }
+  const submitHandler = (e) => {
+      e.preventDefault();
+      setDisabled(true);
+      props.client.login(e.target?.username.value, e.target?.password.value).then((response) => {
+          setDisabled(false);
+          props.loggedIn(response.data.token)
+      }).catch(() => {
+          alert("an error occured.")
+          setDisabled(false);
+      })
+  }
+  const submitHandlerSignUp = (UserObject) => 
+  {
+      console.log("THIS ONE")
+      props.client.login(UserObject.username, UserObject.password).then((response) => {
+      props.loggedIn(response.data.token)
+  }).catch(() => {
+      console.log("THIS ONE HERE")
+      alert("an error occured.")
+  })
+  }
 
   return (
     <div id="authorisation" className="h-screen w-screen flex flex-1 justify-center items-center ">
       {!authProcess ? (
-        <SignIn setAuthProcess={setAuthProcess} />
+        <SignIn submitHandler={submitHandler} setAuthProcess={setAuthProcess} />
       ) : (
-        <SignUp setAuthProcess={setAuthProcess} />
+        <SignUp submitHandler={submitHandlerSignUp} client={props.client} setAuthProcess={setAuthProcess} />
       )}
 
       {/* Alfie Code */}

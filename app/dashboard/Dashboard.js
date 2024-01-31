@@ -50,7 +50,7 @@ const Dashboard = (props) => {
   return (
     <div>
       <div className="fixed z-[1] right-4 top-4">
-        <LogoutButton />
+        <LogoutButton setToken={props.setToken} />
       </div>
       <div className=" md:fixed md:w-[50%] max-sm:w-screen max-sm:h-[50%] md:h-[50vw] pr-[5%] pl-[5%] pt-[5%] pb-[10%]">
         <EventForm 
@@ -64,7 +64,7 @@ const Dashboard = (props) => {
           currentEvent={current}
         />
       </div>
-      <div className="md:w-[50%] h-full pr-[5%] sm:pl-[5%] md:fixed right-0 sm:w-[100vw] md:overflow-y-scroll">
+      <div className="md:w-[50%] h-full pl-[5%] pr-[5%] sm:pl-[5%] md:fixed right-0 sm:w-[100vw] md:overflow-y-scroll">
         {/* {buildrows} */}
         {events.map((current) => (
           <div>

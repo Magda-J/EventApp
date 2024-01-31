@@ -2,10 +2,18 @@
 
 import { useState, useEffect } from "react";
 
-const SignIn = ({setAuthProcess}) => {
-  const handleLogin = (e) => {
+const SignIn = ({setAuthProcess, submitHandler}) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Login");
+
+    try {
+      console.log("Signing in user")
+      await submitHandler(e);
+
+    } catch (error) {
+      console.error(error);
+      console.error("Failure signing in user");
+    }
   };
 
   const handleSignUp = () => {
