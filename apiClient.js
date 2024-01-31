@@ -66,6 +66,13 @@ export class ApiClient {
 
     return this.authenticatedCall("post", `${url}signup`, {username, password});
   }
+
+  async checkUsername(userDetails) {
+    console.log("Checking username in database")
+    console.log(userDetails)
+    const username = "Potato"
+    return this.authenticatedCall('get', `${url}username/${userDetails.username}`);
+  }
 }
 
 // name: String,

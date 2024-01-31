@@ -7,11 +7,11 @@ const SignUp = ({submitHandler, setAuthProcess, client}) => {
   const checkPassword = () => {
         const isRight = /^(?=.*[a-zA-Z0-9])(?=.*[\W_]).{8,20}$/g.test(userObject.password);
         console.log("checked")
-        return isRight ? true : false //alert("Valid") : alert("Invalid") 
+        return isRight ? true : false 
       }
   const comparePassword = () => {
     console.log(`Password1: ${userObject.password} and Password2: ${userObject.password2}`);
-
+    
     if(userObject.password === userObject.password2) {
       return checkPassword();
     }
@@ -27,29 +27,49 @@ const SignUp = ({submitHandler, setAuthProcess, client}) => {
   }
   const handleSignUp = async (e) => {
     e.preventDefault();
-    const isPassword = comparePassword();
-    console.log(`Password Check: ${isPassword}`);
+    let userExists;
 
-    if (isPassword) {
-      // Sign up user
-      try {
-        console.log("CALLING SIGN UP USER")
-        await client.signUp(userObject.username, userObject.password);
-        let userObject2 = {username : userObject.username, password: userObject.password}
+    try {
+      console.log("Before checking user")
+      console.log(userObject)
+      userExists = await client.checkUsername(userObject);
+      console.log(userExists.data)
 
-        console.log("NOW CALLING SUBMITHANDLER SIGN UP")
-        await submitHandler(userObject2);
-      } catch (err) {
-        console.error(err);
-        console.log("Something went wrong with signup and signing in user")
+      if (userExists.data == true) {
+        console.log("Username already exists")
+      } else {
+        console.log("Username is free")
       }
-    } else {
-      console.log("Something went wrong SIGN UP!");
+    } catch (error) {
+      console.log(error);
+      console.log("Error making request");
+    }
+    
+    if(userExists.data == false)
+    {
+      const isPassword = comparePassword();
+      console.log(`Password Check: ${isPassword}`);
+
+      if (isPassword) {
+        // Sign up user
+        try {
+          await client.signUp(userObject.username, userObject.password);
+          let userObject2 = {username : userObject.username, password: userObject.password}
+          await submitHandler(userObject2);
+          return;
+        } catch (err) {
+          console.error(err);
+          console.log("Something went wrong with signup and signing in user")
+        }
+      } else {
+        console.log(`Password: ${userObject.password} and Password2: ${userObject.password2}`)
+        console.log("Something went wrong SIGN UP!");
+        console.log("Password is wrong")
+        return;
+      } 
     }
 
-    // Send user and password to database
-    // Create Access token
-    // Access page
+    console.log("DIDN'T DO ANYTHING WITH DATABASE")
   };
 
   const handleLogin = () => {
