@@ -34,10 +34,11 @@ background: none;
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-background: #ff0000;
+background: #087CA7;
+border-radius: 16px
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-background: #ff0000;
+background: #087CA7;
 }
