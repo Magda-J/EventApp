@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { ApiClient } from "@/apiClient";
 import Dashboard from "@/app/dashboard/Dashboard";
-import Login from "@/app/components/Login";
+import AuthoriseUser from "@/app/components/AuthoriseUser";
 
 export default function Home() {
   const [token, setToken] = useState(null);
@@ -10,6 +10,10 @@ export default function Home() {
     () => token,
     () => logout()
   );
+
+  useEffect(() => {
+    console.log("Page Log out")
+  }, [token]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -31,9 +35,9 @@ export default function Home() {
   return (
     <>
       {token ? (
-        <Dashboard client={client}/>
+        <Dashboard setToken={setToken} client={client}/>
       ) : (
-        <Login loggedIn={(token) => login(token)} client={client} />
+        <AuthoriseUser loggedIn={(token) => login(token)} client={client} />
       )}
     </>  
   );
