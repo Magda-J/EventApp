@@ -10,8 +10,6 @@ const SignUp = ({submitHandler, setAuthProcess, client}) => {
         return isRight ? true : false 
       }
   const comparePassword = () => {
-    console.log(`Password1: ${userObject.password} and Password2: ${userObject.password2}`);
-    
     if(userObject.password === userObject.password2) {
       return checkPassword();
     }
@@ -30,16 +28,10 @@ const SignUp = ({submitHandler, setAuthProcess, client}) => {
     let userExists;
 
     try {
-      console.log("Before checking user")
-      console.log(userObject)
+      
       userExists = await client.checkUsername(userObject);
       console.log(userExists.data)
 
-      if (userExists.data == true) {
-        console.log("Username already exists")
-      } else {
-        console.log("Username is free")
-      }
     } catch (error) {
       console.log(error);
       console.log("Error making request");
@@ -48,7 +40,6 @@ const SignUp = ({submitHandler, setAuthProcess, client}) => {
     if(userExists.data == false)
     {
       const isPassword = comparePassword();
-      console.log(`Password Check: ${isPassword}`);
 
       if (isPassword) {
         // Sign up user
@@ -59,17 +50,14 @@ const SignUp = ({submitHandler, setAuthProcess, client}) => {
           return;
         } catch (err) {
           console.error(err);
-          console.log("Something went wrong with signup and signing in user")
         }
       } else {
-        console.log(`Password: ${userObject.password} and Password2: ${userObject.password2}`)
-        console.log("Something went wrong SIGN UP!");
-        console.log("Password is wrong")
+        alert("Wrong Username or Password. \n Try again.")
         return;
       } 
     }
 
-    console.log("DIDN'T DO ANYTHING WITH DATABASE")
+    alert("User name taken")
   };
 
   const handleLogin = () => {
@@ -79,10 +67,10 @@ const SignUp = ({submitHandler, setAuthProcess, client}) => {
 
 
   return (
-    <div id="signUp" className="h-1/2 w-1/4 border-black border-4 border-solid rounded-lg shadow-lg">
+    <div className="h-1/2 bg-white overflow-hidden sm:w-1/4 w-2/3 border-[#087CA7] border-2 border-solid rounded-lg shadow-lg bg-slate-200 shadow-lg shadow-black">
       <form
         onSubmit={handleSignUp}
-        className="flex h-full w-full gap-6 justify-center items-center font-semibold"
+        className="flex h-full w-full gap-6 justify-center bg-slate-200 items-center font-semibold"
       >
         <div className="flex w-full flex-col justify-center items-center">
           {/* Username */}
@@ -93,7 +81,7 @@ const SignUp = ({submitHandler, setAuthProcess, client}) => {
               name="username"
               onChange={handleInputChange}
               value={userObject.name}
-              className="h-12 w-3/4 bg-slate-200 rounded-lg text-center"
+              className="h-12 w-3/4 bg-white border-[#087CA7] border-2 rounded-lg text-center"
             />
           </div>
           {/* Passwords */}
@@ -104,7 +92,7 @@ const SignUp = ({submitHandler, setAuthProcess, client}) => {
               name="password"
               onChange={handleInputChange}
               value={userObject.password}
-              className="h-12 w-3/4 bg-cPink bg-slate-200 rounded-lg text-center"
+              className="h-12 w-3/4 border-[#087CA7] border-2 bg-white rounded-lg text-center"
             />
           </div>
 
@@ -116,13 +104,13 @@ const SignUp = ({submitHandler, setAuthProcess, client}) => {
               name="password2"
               onChange={handleInputChange}
               value={userObject.password2}
-              className="h-12 w-3/4 bg-cPink bg-slate-200 rounded-lg text-center"
+              className="h-12 w-3/4 border-2 border-[#087CA7] bg-white rounded-lg text-center"
             />
           </div>
 
           {/* Authorisation */}
           <div className="w-full flex items-center flex-col gap-4">
-            <button className="font-semibold bg-cCerulean hover:bg-cPink h-10 w-1/4 rounded-lg">
+            <button className="font-semibold bg-[#087CA7] h-10 sm:w-1/2 w-1/2 rounded-lg hover:text-[#087CA7] hover:bg-[#DFC2F2] focus:ring-1 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 transition-all duration-300 ease-in-out">
               Sign Up
             </button>
             <p className="font-semibold hover:text-cCerulean" onClick={handleLogin}>Login?</p>
