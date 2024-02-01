@@ -35,6 +35,8 @@ background: none;
 /* Handle */
 ::-webkit-scrollbar-thumb {
 background: #087CA7;
+border-radius: 16px
+
 }
 
 /* Handle on hover */
