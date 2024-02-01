@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://localhost:3001/";
+const url = "https://event-app-tyhr.onrender.com/";
 
 export class ApiClient {
   // the constructor function takes in two callback functions which change the state in the page.js.
