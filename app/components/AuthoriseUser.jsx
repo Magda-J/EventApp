@@ -9,7 +9,6 @@ const AuthoriseUser = (props) => {
   const [authProcess, setAuthProcess] = useState(false);
 
   useEffect(() => {
-
   }, [authProcess])
 
   // - - Alfie Code - -
@@ -20,8 +19,8 @@ const AuthoriseUser = (props) => {
           setDisabled(false);
           props.loggedIn(response.data.token)
       }).catch(() => {
-          alert("an error occured.")
-          setDisabled(false);
+        alert("Wrong Username or Password.\nTry again.")
+        setDisabled(false);
       })
   }
   const submitHandlerSignUp = (UserObject) => 
@@ -31,7 +30,6 @@ const AuthoriseUser = (props) => {
       props.loggedIn(response.data.token)
   }).catch(() => {
       console.log("THIS ONE HERE")
-      alert("an error occured.")
   })
   }
 
