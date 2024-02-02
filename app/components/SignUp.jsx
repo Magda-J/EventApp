@@ -13,7 +13,7 @@ const SignUp = ({submitHandler, setAuthProcess, client}) => {
     if(userObject.password === userObject.password2) {
       return checkPassword();
     }
-
+    alert("Passwords must match")
     return false;
   }
 
@@ -52,7 +52,7 @@ const SignUp = ({submitHandler, setAuthProcess, client}) => {
           console.error(err);
         }
       } else {
-        alert("Wrong Username or Password. \n Try again.")
+        alert("Password must be: \n8-20 characters long.\ncontain at least one special character.\ncontain at least one number.\ncontain at least one capital and lowecase letter.")
         return;
       } 
     }
