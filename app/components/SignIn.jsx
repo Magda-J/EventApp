@@ -12,7 +12,7 @@ const SignIn = ({setAuthProcess, submitHandler}) => {
 
     } catch (error) {
       console.error(error);
-      alert("Testing")
+      alert("Wrong username or password.")
       console.error("Failure signing in user");
     }
   };
